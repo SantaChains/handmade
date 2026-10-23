@@ -1,0 +1,14 @@
+# clang-format 规则 —— 与仓库现有 C++ 风格对齐 (Handmade Hero 风格)
+# 改动后请跑: clang-format --style=file --dry-run -Werror src/*.cpp src/*.h
+BasedOnStyle: LLVM
+IndentWidth: 2
+TabWidth: 2
+UseTab: Never
+# 现有代码的参数行 + 中文尾部注释较长, 放宽到 120 避免被重新折行
+ColumnLimit: 120
+PointerAlignment: Left
+DerivePointerAlignment: false
+# include 顺序由手写维护 (Handmade 风格常带分组注释), 不自动排序
+SortIncludes: false
+# 保留原始换行符 (仓库里 C++ 是 CRLF, 不强制改写)
+DeriveLineEnding: true

@@ -1,0 +1,237 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "cmake: 配置 (Debug)",
+      "detail": "生成器 Ninja, 产物在 build-cmake/debug; 首次或改 CMakeLists 后跑一次",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--preset", "debug"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "build: CMake 增量 (Debug)",
+      "detail": "源码没改动时 ninja 输出 no work to do 并秒返回; 有改动只重编受影响的编译单元",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--build", "--preset", "debug"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": {
+        "owner": "cpp",
+        "source": "clang-cl",
+        "fileLocation": ["autoDetect", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.+?)\\((\\d+)(?:,(\\d+))?\\):\\s+(fatal error|error|warning|note):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    },
+    {
+      "label": "build: CMake 增量 (Release)",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--build", "--preset", "release"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "problemMatcher": {
+        "owner": "cpp",
+        "source": "clang-cl",
+        "fileLocation": ["autoDetect", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.+?)\\((\\d+)(?:,(\\d+))?\\):\\s+(fatal error|error|warning|note):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    },
+    {
+      "label": "build: CMake 增量 (Profile)",
+      "detail": "/O2 + /Oy- 保帧指针, 给采样/抓栈用",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--build", "--preset", "profile"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "problemMatcher": {
+        "owner": "cpp",
+        "source": "clang-cl",
+        "fileLocation": ["autoDetect", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.+?)\\((\\d+)(?:,(\\d+))?\\):\\s+(fatal error|error|warning|note):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    },
+    {
+      "label": "build: CMake 全量重编 (Debug)",
+      "detail": "--clean-first: 删掉已编译产物后从头编, 用于排除增量缓存问题",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--build", "--preset", "debug", "--clean-first"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "problemMatcher": {
+        "owner": "cpp",
+        "source": "clang-cl",
+        "fileLocation": ["autoDetect", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.+?)\\((\\d+)(?:,(\\d+))?\\):\\s+(fatal error|error|warning|note):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    },
+    {
+      "label": "build: CMake 全量重编 (Release)",
+      "detail": "--clean-first: 删掉已编译产物后从头编 (Release 档验证用)",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--build", "--preset", "release", "--clean-first"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "problemMatcher": {
+        "owner": "cpp",
+        "source": "clang-cl",
+        "fileLocation": ["autoDetect", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.+?)\\((\\d+)(?:,(\\d+))?\\):\\s+(fatal error|error|warning|note):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    },
+    {
+      "label": "build: CMake 全量重编 (Profile)",
+      "detail": "--clean-first: 删掉已编译产物后从头编 (Profile 档验证用)",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--build", "--preset", "profile", "--clean-first"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "problemMatcher": {
+        "owner": "cpp",
+        "source": "clang-cl",
+        "fileLocation": ["autoDetect", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.+?)\\((\\d+)(?:,(\\d+))?\\):\\s+(fatal error|error|warning|note):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    },
+    {
+      "label": "cmake: 重新配置 (Debug, --fresh)",
+      "detail": "丢掉 CMakeCache 后从零配置 (换工具链/换开关时用)",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--preset", "debug", "--fresh"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "build: CLion 同款 (Ninja 多线程全量)",
+      "detail": "等价于 CLion 的 Build All: 显式并行度, 失败即停",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--build", "--preset", "debug", "--parallel"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "build: Debug (build.bat 旧路径)",
+      "type": "shell",
+      "command": "${workspaceFolder}\\build.bat",
+      "args": [],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "problemMatcher": ["$msCompile"]
+    },
+    {
+      "label": "build: Profile (build.bat -profile)",
+      "type": "shell",
+      "command": "${workspaceFolder}\\build.bat",
+      "args": ["-profile"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "problemMatcher": ["$msCompile"]
+    },
+    {
+      "label": "build: Release (build.bat -release)",
+      "type": "shell",
+      "command": "${workspaceFolder}\\build.bat",
+      "args": ["-release"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "problemMatcher": ["$msCompile"]
+    },
+    {
+      "label": "build: xmake (当前模式)",
+      "detail": "xmake 不带 -r 才是增量; -r = --rebuild 全量",
+      "type": "shell",
+      "command": "xmake",
+      "args": [],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "build: xmake (Debug 全量)",
+      "detail": "xmake -r = --rebuild 全量重编; 不带 -r 才是增量",
+      "type": "shell",
+      "command": "cmd",
+      "args": ["/c", "xmake f -m debug -y && xmake -r"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "build: xmake (Release 全量)",
+      "type": "shell",
+      "command": "cmd",
+      "args": ["/c", "xmake f -m release -y && xmake -r"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "build: xmake (Profile 全量)",
+      "type": "shell",
+      "command": "cmd",
+      "args": ["/c", "xmake f -m profile -y && xmake -r"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "ide: 生成 compile_commands.json (xmake -> 仓库根)",
+      "type": "shell",
+      "command": "xmake",
+      "args": ["project", "-k", "compile_commands", "--lsp=clangd"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    }
+  ]
+}

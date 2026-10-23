@@ -1,0 +1,41 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": { "major": 3, "minor": 25, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build-cmake/${presetName}",
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "D:/Soft/SCOOP/apps/llvm/current/bin/clang-cl.exe",
+        "CMAKE_LINKER": "D:/Soft/SCOOP/apps/llvm/current/bin/lld-link.exe",
+        "CMAKE_AR": "D:/Soft/SCOOP/apps/llvm/current/bin/llvm-lib.exe",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+    {
+      "name": "debug",
+      "inherits": "base",
+      "displayName": "Debug (默认, 增量)",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
+    },
+    {
+      "name": "release",
+      "inherits": "base",
+      "displayName": "Release (/O2 + PDB)",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+    },
+    {
+      "name": "profile",
+      "inherits": "base",
+      "displayName": "Profile (/O2 + /Oy- 帧指针)",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Profile" }
+    }
+  ],
+  "buildPresets": [
+    { "name": "debug", "configurePreset": "debug" },
+    { "name": "release", "configurePreset": "release" },
+    { "name": "profile", "configurePreset": "profile" }
+  ]
+}

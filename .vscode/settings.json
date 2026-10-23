@@ -1,0 +1,75 @@
+{
+  // ===========================================================
+  //  工程级 VS Code 设置
+  //  构建见 tasks.json (CMake + Ninja), 调试见 launch.json (CodeLLDB),
+  //  代码风格见根目录 .clang-format / .editorconfig
+  // ===========================================================
+
+  // ---- 编码与换行: 与 clang-cl 的 /utf-8 及仓库现状 (CRLF) 对齐 ----
+  "files.encoding": "utf8",
+  "files.autoGuessEncoding": false, // 关掉猜测, 否则中文注释可能被识别成 GBK 存回去
+  "files.eol": "\r\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+
+  // ---- 构建产物不进搜索/监听: build/ 已 91MB, build-cmake/ 22MB ----
+  "files.watcherExclude": {
+    "**/build/**": true,
+    "**/build-cmake/**": true,
+    "**/cmake-build-*/**": true,
+    "**/.xmake/**": true,
+    "**/.vs/**": true,
+    "**/.history/**": true
+  },
+  "search.exclude": {
+    "**/build/**": true,
+    "**/build-cmake/**": true,
+    "**/cmake-build-*/**": true,
+    "**/.xmake/**": true,
+    "**/.vs/**": true,
+    "**/.history/**": true,
+    "**/hero/**": true
+  },
+
+  // ---- CMake Tools: 固定用 4.4.2, 与 tasks.json / 命令行同一份 ----
+  // (用户级 cmake.cmakePath 指向 Qt 的 3.30.5, 低于本工程的 cmake_minimum_required(4.3),
+  //  配置会直接报错; CLion 自带 4.3.1 也建议改成这份, 避免两边来回重生成 build.ninja)
+  "cmake.cmakePath": "D:/langcode/gcc/mingw64/bin/cmake.exe",
+  "cmake.useCMakePresets": "always",
+
+  // ---- C/C++: 格式化交给 clangd + 根目录 .clang-format ----
+  "[cpp]": {
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+  },
+  "[c]": {
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+  },
+
+  // ---- doxdocgen (键盘敲 /** 生成文件头/函数注释) ----
+  // 原文件被误命名为 .vscode/.settings.json, VS Code 从未读到过; 现迁到本文件生效
+  "doxdocgen.c.triggerSequence": "/**",
+  "doxdocgen.c.firstLine": "/**",
+  "doxdocgen.c.commentPrefix": " * ",
+  "doxdocgen.c.lastLine": " */",
+  "doxdocgen.generic.linesToGet": 30, // 稍微加大向下解析的行数，防止长函数解析失败
+  "doxdocgen.generic.useGitUserName": true,
+  "doxdocgen.generic.useGitUserEmail": true,
+  "doxdocgen.generic.generateSmartText": true,
+  "doxdocgen.generic.splitCasingSmartText": true,
+  "doxdocgen.generic.boolReturnsTrueFalse": true, // bool 返回值拆分 true/false
+  "doxdocgen.generic.order": [
+    "brief", // 一句话简介
+    "empty", // 空行
+    "tparam", // 模板参数
+    "param", // 函数参数
+    "return", // 返回值
+    "custom" // 自定义标签
+  ],
+  "doxdocgen.file.fileOrder": [
+    "file", // 文件名
+    "author", // 作者
+    "brief", // 文件简介
+    "date", // 创建日期
+    "copyright" // 版权
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug (增量构建 + CodeLLDB)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build-cmake/debug/handmade.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}/build-cmake/debug",
+      "sourceLanguages": ["cpp"],
+      "expressions": "native",
+      "preLaunchTask": "build: CMake 增量 (Debug)"
+    },
+    {
+      "name": "Debug (全量构建 + CodeLLDB)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build-cmake/debug/handmade.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}/build-cmake/debug",
+      "sourceLanguages": ["cpp"],
+      "expressions": "native",
+      "preLaunchTask": "build: CMake 全量重编 (Debug)"
+    },
+    {
+      "name": "Debug (直接启动已有产物, 不重新构建)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build-cmake/debug/handmade.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}/build-cmake/debug",
+      "sourceLanguages": ["cpp"],
+      "expressions": "native"
+    },
+    {
+      "name": "Profile (优化构建 + CodeLLDB)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build-cmake/profile/handmade.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}/build-cmake/profile",
+      "sourceLanguages": ["cpp"],
+      "expressions": "native",
+      "preLaunchTask": "build: CMake 增量 (Profile)"
+    },
+    {
+      "name": "Profile (全量构建 + CodeLLDB)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build-cmake/profile/handmade.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}/build-cmake/profile",
+      "sourceLanguages": ["cpp"],
+      "expressions": "native",
+      "preLaunchTask": "build: CMake 全量重编 (Profile)"
+    },
+    {
+      "name": "Release (优化构建 + CodeLLDB)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build-cmake/release/handmade.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}/build-cmake/release",
+      "sourceLanguages": ["cpp"],
+      "expressions": "native",
+      "preLaunchTask": "build: CMake 增量 (Release)"
+    },
+    {
+      "name": "Release (全量构建 + CodeLLDB)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build-cmake/release/handmade.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}/build-cmake/release",
+      "sourceLanguages": ["cpp"],
+      "expressions": "native",
+      "preLaunchTask": "build: CMake 全量重编 (Release)"
+    },
+    {
+      "name": "Debug (build\\ 产物, CodeLLDB)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/win64-handmade.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}/build",
+      "sourceLanguages": ["cpp"],
+      "expressions": "native"
+    },
+    {
+      "name": "Attach (build-cmake Debug 产物, 等下次启动)",
+      "type": "lldb",
+      "request": "attach",
+      "program": "${workspaceFolder}/build-cmake/debug/handmade.exe",
+      "waitFor": true,
+      "cwd": "${workspaceFolder}/build-cmake/debug",
+      "sourceLanguages": ["cpp"]
+    },
+    {
+      "name": "Attach (build\\ 产物, 等下次启动)",
+      "type": "lldb",
+      "request": "attach",
+      "program": "${workspaceFolder}/build/win64-handmade.exe",
+      "waitFor": true,
+      "cwd": "${workspaceFolder}/build",
+      "sourceLanguages": ["cpp"]
+    }
+  ]
+}

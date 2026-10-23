@@ -1,0 +1,33 @@
+# EditorConfig —— https://editorconfig.org
+# 注意: 本格式只支持"整行注释"; 值后面写 `xxx = 2  # 说明` 会把注释算进值里,
+# 整个键静默失效 (本文件之前就踩了这个坑)。
+root = true
+
+[*]
+charset = utf-8
+end_of_line = crlf
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# C/C++: 与根目录 .clang-format 的 IndentWidth 2 保持一致
+[*.{c,cc,cpp,cxx,h,hh,hpp,hxx,inl,ipp}]
+indent_size = 2
+
+# CMake / xmake 惯例 4 空格
+[{CMakeLists.txt,*.cmake}]
+indent_size = 4
+
+[*.lua]
+indent_size = 4
+
+[*.{json,jsonc,yml,yaml}]
+indent_size = 2
+
+# 批处理: 必须是 CRLF; 行尾反斜杠续行依赖尾随空白, 不能裁
+[*.{bat,cmd}]
+end_of_line = crlf
+trim_trailing_whitespace = false
+
+[*.md]
+trim_trailing_whitespace = false

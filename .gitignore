@@ -1,0 +1,10 @@
+.history/
+
+hero/
+work/
+build/
+.vs/
+.xmake/
+compile_commands.json
+build-cmake/
+cmake-build-*/

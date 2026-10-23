@@ -1,0 +1,6 @@
+# clangd 工程级配置 (对比 ~/AppData/Local/clangd/config.yaml 的用户级配置, 这里是工程级)
+# 只做一件事: 把编译数据库钉到 CMake/Ninja 实际使用的那份,
+# 否则 clangd 会退回去吃仓库根目录由 xmake 生成的旧 compile_commands.json。
+# 换 preset 调试时改这一行即可 (release / profile)。
+CompileFlags:
+  CompilationDatabase: build-cmake/debug
